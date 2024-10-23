@@ -1,0 +1,21 @@
+package security;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+
+@Configuration
+@EnableWebSecurity
+
+public class SecurityConfi{
+	
+	@Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .authorizeRequests()
+            .antMatchers("/estudiantes/**").authenticated()
+            .and()
+            .csrf().disable();
+    }
+
+}

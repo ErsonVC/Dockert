@@ -1,0 +1,15 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: estudiante-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/estudiante_db  # Cambia el nombre de la base de datos según corresponda
+    username: root  # Usuario de MySQL
+    password: 123456  # Asegúrate de usar la misma contraseña que definiste en docker-compose.yml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

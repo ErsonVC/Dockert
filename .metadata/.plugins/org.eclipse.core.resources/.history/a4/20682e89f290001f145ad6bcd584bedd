@@ -1,0 +1,27 @@
+package security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+
+@Configuration
+@EnableWebSecurity
+
+public class SecurityConfi{
+	
+	@Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeRequests()
+                .antMatchers("/estudian").permitAll() // Cambia esto según tus necesidades
+                .anyRequest().authenticated()
+                .and()
+            .csrf().disable(); // Desactiva CSRF solo si es necesario
+
+        return http.build();
+    }
+
+}

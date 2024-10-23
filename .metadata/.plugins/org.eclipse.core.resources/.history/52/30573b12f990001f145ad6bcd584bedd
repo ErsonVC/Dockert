@@ -1,0 +1,44 @@
+package controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import config.JwtUtil;
+import model.AuthRequest;
+import model.User;
+import service.UserService;
+
+@RestController
+public class AuthController {
+
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
+    private UserService userService; // Servicio para gestionar usuarios
+
+    @Autowired
+    private JwtUtil jwtUtil; // Utilidad para generar tokens JWT
+
+    @PostMapping("/auth/login")
+    public String login(@RequestBody AuthRequest authRequest) {
+        // Validar el usuario y la contraseña
+        User user = userService.findByUsername(authRequest.getUsername());
+        
+        if (user != null && passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
+            // Si la validación es exitosa, genera un token JWT
+            return jwtUtil.generateToken(authRequest.getUsername());
+        } else {
+            throw new RuntimeException("Credenciales inválidas"); // Manejo de errores
+        }
+    }
+    
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterDto userRegisterDto) {
+        userService.registerUser(userRegisterDto);
+        return ResponseEntity.ok("Usuario registrado exitosamente");
+    }
+}

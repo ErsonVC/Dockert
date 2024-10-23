@@ -1,0 +1,17 @@
+package controller;
+
+@RestController
+public class CursoController {
+
+    private List<String> cursos = Arrays.asList("Curso A", "Curso B", "Curso C");
+
+    @GetMapping("/cursos")
+    public List<String> listarCursos() {
+        return cursos;
+    }
+
+    @GetMapping("/cursos/{id}")
+    public String buscarCurso(@PathVariable int id) {
+        return cursos.get(id);
+    }
+}

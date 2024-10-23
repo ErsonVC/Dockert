@@ -1,0 +1,16 @@
+package security;
+
+@Configuration
+@EnableWebSecurity
+@EnableResourceServer
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .authorizeRequests()
+            .antMatchers("/estudiantes/**").authenticated()
+            .and()
+            .csrf().disable();
+    }
+}

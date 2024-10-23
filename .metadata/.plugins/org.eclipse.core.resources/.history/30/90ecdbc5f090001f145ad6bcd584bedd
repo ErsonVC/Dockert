@@ -1,0 +1,17 @@
+package controller;
+
+@RestController
+public class EstudianteController {
+
+    private List<String> estudiantes = Arrays.asList("Estudiante A", "Estudiante B", "Estudiante C");
+
+    @GetMapping("/estudiantes")
+    public List<String> listarEstudiantes() {
+        return estudiantes;
+    }
+
+    @GetMapping("/estudiantes/{id}")
+    public String buscarEstudiante(@PathVariable int id) {
+        return estudiantes.get(id);
+    }
+}

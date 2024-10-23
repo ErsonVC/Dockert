@@ -1,0 +1,12 @@
+package service;
+
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository; // Repositorio para acceder a los usuarios
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username); // Método para buscar el usuario
+    }
+}

@@ -1,0 +1,15 @@
+package service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository; // Repositorio para acceder a los usuarios
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username); // Método para buscar el usuario
+    }
+}

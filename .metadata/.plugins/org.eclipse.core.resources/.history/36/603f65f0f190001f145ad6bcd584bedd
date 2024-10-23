@@ -1,0 +1,9 @@
+package security;
+
+
+@Configuration
+@EnableWebSecurity
+@EnableResourceServer
+public class SecurityConfi {
+
+}

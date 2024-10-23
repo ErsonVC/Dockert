@@ -1,0 +1,21 @@
+package controller;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import model.AuthRequest;
+
+public class AuthController {
+	
+	private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @PostMapping("/auth/login")
+    public String login(@RequestBody AuthRequest authRequest) {
+        // Aquí debes validar el usuario y la contraseña
+        // Si la validación es exitosa, genera un token JWT
+        String token = JwtUtil.generateToken(authRequest.getUsername());
+        return token;
+    }
+
+}
